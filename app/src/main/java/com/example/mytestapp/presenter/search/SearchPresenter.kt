@@ -13,9 +13,10 @@ internal class SearchPresenter internal constructor(
 ) : PresenterSearchContract, GitHubRepositoryCallback {
 
     private var view: ViewContract? = null
-    private var isSuccess: Boolean = false
 
-
+    override fun onAttach(view: ViewSearchContract) {
+        this.view = view
+    }
 
     override fun searchGitHub(searchQuery: String) {
         viewContract.displayLoading(true)
@@ -45,6 +46,10 @@ internal class SearchPresenter internal constructor(
     override fun handleGitHubError() {
         viewContract.displayLoading(false)
         viewContract.displayError()
+    }
+
+    override fun onDetach() {
+        view = null
     }
 
 }
