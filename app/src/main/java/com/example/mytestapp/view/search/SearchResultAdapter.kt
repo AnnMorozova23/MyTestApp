@@ -3,11 +3,12 @@ package com.example.mytestapp.view.search
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytestapp.R
 import com.example.mytestapp.model.SearchResult
 import com.example.mytestapp.view.search.SearchResultAdapter.SearchResultViewHolder
-import kotlinx.android.synthetic.main.list_item.view.*
+
 
 internal class SearchResultAdapter : RecyclerView.Adapter<SearchResultViewHolder>() {
 
@@ -41,7 +42,7 @@ internal class SearchResultAdapter : RecyclerView.Adapter<SearchResultViewHolder
     internal class SearchResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(searchResult: SearchResult) {
-            itemView.repositoryName.text = searchResult.fullName
+            itemView.findViewById<TextView>(R.id.repositoryName).text = searchResult.fullName
         }
     }
 }
