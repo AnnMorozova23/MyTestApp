@@ -8,7 +8,6 @@ android {
     compileSdk 31
 
 
-
     defaultConfig {
         applicationId "com.example.mytestapp"
         minSdk 21
@@ -38,11 +37,33 @@ android {
         }
     }
 
+    android {
+        testOptions {
+            animationsDisabled true
+        }
+    }
+
     testOptions {
         unitTests {
             includeAndroidResources = true
         }
     }
+
+    flavorDimensions 'version'
+
+    productFlavors {
+        free {
+            dimension 'version'
+            versionNameSuffix '.free'
+            buildConfigField "String", "TYPE", '"FREE"'
+        }
+        paid {
+            dimension 'version'
+            versionNameSuffix '.paid'
+            buildConfigField "String", "TYPE", '"PAID"'
+        }
+    }
+
 
 }
 
