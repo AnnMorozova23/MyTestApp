@@ -12,15 +12,19 @@ import com.example.mytestapp.presenter.search.PresenterSearchContract
 import com.example.mytestapp.presenter.search.SearchPresenter
 import com.example.mytestapp.repository.GitHubApi
 import com.example.mytestapp.repository.GitHubRepository
+import com.example.mytestapp.repository.RepositoryContract
 import com.example.mytestapp.view.details.DetailsActivity
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class MainActivity : AppCompatActivity(), ViewSearchContract {
 
     private lateinit var binding: ActivityMainBinding
     private val adapter = SearchResultAdapter()
-    private val presenter: PresenterSearchContract = SearchPresenter(this, createRepository())
+    private val presenter: PresenterSearchContract = SearchPresenter(this,
+        createRepository() as GitHubRepository
+    )
     private var totalCount: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +67,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         })
     }
 
-    private fun createRepository(): GitHubRepository {
+    private fun createRepository(): RepositoryContract {
         return GitHubRepository(createRetrofit().create(GitHubApi::class.java))
     }
 
@@ -78,6 +82,14 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
         searchResults: List<com.example.mytestapp.model.SearchResult>,
         totalCount: Int
     ) {
+        with(binding.totalCountTextView) {
+            visibility = View.VISIBLE
+            text =
+                String.format(
+                    Locale.getDefault(), getString(R.string.results_count),
+                    totalCount
+                )
+        }
         this.totalCount = totalCount
         adapter.updateResults(searchResults)
     }

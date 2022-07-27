@@ -2,15 +2,15 @@ package com.example.mytestapp.presenter.search
 
 import com.example.mytestapp.model.SearchResponse
 import com.example.mytestapp.repository.GitHubRepository
+import com.example.mytestapp.repository.RepositoryCallback
 import com.example.mytestapp.view.ViewContract
 import com.example.mytestapp.view.search.ViewSearchContract
 import retrofit2.Response
-import com.example.mytestapp.repository.GitHubRepository.GitHubRepositoryCallback
 
 internal class SearchPresenter internal constructor(
     private val viewContract: ViewSearchContract,
     private val repository: GitHubRepository
-) : PresenterSearchContract, GitHubRepositoryCallback {
+) : PresenterSearchContract, RepositoryCallback {
 
     private var view: ViewContract? = null
 
