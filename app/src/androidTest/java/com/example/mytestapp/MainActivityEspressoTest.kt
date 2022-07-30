@@ -1,6 +1,5 @@
 package com.example.mytestapp
 
-import android.os.Build
 import android.view.View
 import android.widget.EditText
 import androidx.lifecycle.Lifecycle
