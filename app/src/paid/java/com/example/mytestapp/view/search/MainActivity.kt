@@ -22,7 +22,8 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
 
     private lateinit var binding: ActivityMainBinding
     private val adapter = SearchResultAdapter()
-    private val presenter: PresenterSearchContract = SearchPresenter(this,
+    private val presenter: PresenterSearchContract = SearchPresenter(
+        this,
         createRepository() as GitHubRepository
     )
     private var totalCount: Int = 0
@@ -43,28 +44,24 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     private fun setRecyclerView() {
-       binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter
     }
 
     private fun setQueryListener() {
-       binding.searchEditText.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                val query = binding.searchEditText.text.toString()
-                if (query.isNotBlank()) {
-                    presenter.searchGitHub(query)
-                    return@OnEditorActionListener true
-                } else {
-                    Toast.makeText(
-                        this@MainActivity,
-                        getString(R.string.enter_search_word),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@OnEditorActionListener false
-                }
+
+        binding.searchActivityButton.setOnClickListener {
+            val query = binding.searchEditText.text.toString()
+            if (query.isNotBlank()) {
+                presenter.searchGitHub(query)
+            } else {
+                Toast.makeText(
+                    this@MainActivity,
+                    getString(R.string.enter_search_word),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-            false
-        })
+        }
     }
 
     private fun createRepository(): RepositoryContract {
