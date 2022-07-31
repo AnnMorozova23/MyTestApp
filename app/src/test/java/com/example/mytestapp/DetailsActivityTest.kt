@@ -22,6 +22,7 @@ import org.robolectric.annotation.Config
 
 class DetailsActivityTest {
 
+
     private lateinit var scenario: ActivityScenario<DetailsActivity>
     private lateinit var context: Context
 

@@ -73,7 +73,7 @@ class UIAutomatorTest {
                 Until.findObject(By.res(packageName, "totalCountTextView")),
                 TIMEOUT
             )
-        Assert.assertEquals(changedText.text, "Number of results: 0")
+        Assert.assertEquals(changedText.text, TEST_NUMBER_OF_RESULTS_ZERO)
 
     }
 
@@ -105,7 +105,7 @@ class UIAutomatorTest {
         button.click()
 
         val textView = uiDevice.findObject(By.res(packageName, "totalCountTextView"))
-        Assert.assertEquals(textView.text, "Number of results: 1")
+        Assert.assertEquals(textView.text, TEST_NUMBER_OF_RESULTS_PLUS_1)
     }
 
     @Test
@@ -121,7 +121,7 @@ class UIAutomatorTest {
 
         val textView = uiDevice.findObject(By.res(packageName, "totalCountTextView"))
 
-        Assert.assertEquals(textView.text, "Number of results: -1")
+        Assert.assertEquals(textView.text, TEST_NUMBER_OF_RESULTS_MINUS_1)
     }
 
     @Test
